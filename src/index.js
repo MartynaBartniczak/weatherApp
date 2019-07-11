@@ -5,7 +5,16 @@ import { createStore, applyMiddleware } from 'redux'
 
 import './index.css';
 import App from './components/app'
+import reducers from './reducers'
 import * as serviceWorker from './serviceWorker'
 
-ReactDOM.render(<App />, document.getElementById('root'))
-serviceWorker.unregister()
+const createStoreWithMiddleware = applyMiddleware()(createStore);
+
+ReactDOM.render(
+<Provider store={createStoreWithMiddleware(reducers)}>
+<App />
+</Provider>
+, document.getElementById('root'));
+
+
+serviceWorker.unregister();
